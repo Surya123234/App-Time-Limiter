@@ -1,10 +1,21 @@
 <html>
   <head>
-
+    <link rel="stylesheet" href="popup.css">
+    <script type="text/javascript" src="popup.js"></script>
   </head>
   <body>
-    <script type="text/javascript" src="popup.js"></script>
-    <button id="test">Test</button>
-    <p id="responseText"></p>
+  <h3>What websites will you restrict your time to today?</h3>
+  <form class="form">
+    <label for="website">Website:</label>
+    <input type="url" name="website" id="website">
+
+    <label for="duration-hours">Duration (hours):</label>
+    <input type="number" min="0" max="23" name="duration-hours" id="duration-hours">
+
+    <label for="duration-minutes">Duration (minutes):</label>
+    <input type="number" min="1" max="59" name="duration" id="duration-minutes">
+
+    <button type="submit" id="submit-btn">Submit</button>
+  </form>
   </body>
 </html>

@@ -3,10 +3,11 @@
   "description": "",
   "version": "1.0",
   "manifest_version": 3,
+  "matches": "<all_urls>",
   "background": {
     "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup/popup.html"
   }
 }
