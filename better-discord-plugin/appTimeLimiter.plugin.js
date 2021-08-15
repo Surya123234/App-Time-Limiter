@@ -1,11 +1,11 @@
 /**
- * @name AppTimeTracker
+ * @name AppTimeLimiter
  * @author Yimin
  * @description Description
  * @version 0.0.1
  */
 
-module.exports = class AppTimeTracker {
+ module.exports = class AppTimeLimiter {
   constructor() {
     this.overlayElement;
   }
@@ -35,11 +35,31 @@ module.exports = class AppTimeTracker {
     }
   }
 
+  connectToWS() {
+    // Create WebSocket connection.
+    const socket = new WebSocket('ws://localhost:8999');
+
+    // Connection opened
+    socket.addEventListener('open', function (event) {
+        socket.send('{"origin": "discord", "action": "init"}');
+    });
+
+    // Listen for messages
+    socket.addEventListener('message', (event) => {
+      if (event.data === 'unblock') {
+        this.deleteHideDiv();
+      } else if (event.data === 'block') {
+        this.createHideDiv();
+      }
+    });
+  }
+
   load() {} // Optional function. Called when the plugin is loaded in to memory
 
   // On plugin start
   start() {
     this.createHideDiv();
+    this.connectToWS();
   }
 
   // On stop/reload
